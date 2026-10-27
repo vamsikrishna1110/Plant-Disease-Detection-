@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plant Disease Detection</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2faf6;
+    color: #174d36;
+}
+
+header {
+    background: #064e36;
+    color: white;
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #86efac;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #86efac;
+}
+
+.hero {
+    padding: 55px 6%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero h1 span {
+    color: #16a34a;
+}
+
+.hero p {
+    color: #587568;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.features {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.feature {
+    background: #d9f5e5;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.upload-card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 25px #164e3612;
+}
+
+.upload-card h2 {
+    margin-bottom: 10px;
+}
+
+.upload-card p {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.upload-box {
+    border: 2px dashed #4ade80;
+    border-radius: 12px;
+    padding: 35px 15px;
+    text-align: center;
+    background: #f7fdf9;
+}
+
+.upload-icon {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+input[type="file"] {
+    width: 100%;
+    margin-top: 18px;
+    font-size: 13px;
+}
+
+button {
+    background: #15803d;
+    color: white;
+    padding: 13px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #166534;
+}
+
+.preview {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.preview img {
+    max-width: 100%;
+    max-height: 230px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.section {
+    padding: 40px 6%;
+}
+
+.section h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.disease-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.disease-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 15px #00000008;
+    border: 1px solid #e2eee7;
+}
+
+.disease-icon {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.disease-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.disease-card p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.result-section {
+    background: #e5f7ed;
+    padding: 40px 6%;
+}
+
+.result-card {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    max-width: 700px;
+    margin-top: 20px;
+    box-shadow: 0 3px 15px #00000008;
+}
+
+.result-card h3 {
+    color: #15803d;
+    margin-bottom: 15px;
+}
+
+.result-card p {
+    color: #52665b;
+    line-height: 1.8;
+}
+
+.note {
+    background: #dcfce7;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: #166534;
+    line-height: 1.7;
+}
+
+footer {
+    background: #064e36;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .disease-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 500px) {
+    nav a {
+        margin-left: 0;
+        margin-right: 12px;
+    }
+
+    .disease-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero, .section, .result-section {
+        padding: 30px 5%;
+    }
+
+    .upload-card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Plant<span>Care</span></div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#detect">Detect</a>
+        <a href="#diseases">Diseases</a>
+        <a href="#tips">Tips</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+
+    <div>
+        <h1>Plant Disease <span>Detection</span></h1>
+
+        <p>
+            Keep your plants healthy with intelligent plant disease
+            detection. Upload a clear image of a leaf to get started.
+        </p>
+
+        <div class="features">
+            <div class="feature">🌿 Plant Health</div>
+            <div class="feature">🔍 Disease Detection</div>
+            <div class="feature">☁️ Cloud Ready</div>
+        </div>
+    </div>
+
+    <div class="upload-card" id="detect">
+        <h2>Detect Plant Disease</h2>
+        <p>Select a leaf image from your device.</p>
+
+        <div class="upload-box">
+            <div class="upload-icon">☁️</div>
+            <h3>Upload Leaf Image</h3>
+            <p>Choose a JPG, PNG or other browser-supported image.</p>
+
+            <input type="file" id="leafImage" accept="image/*">
+            <br>
+            <button type="button" onclick="previewImage()">
+                Preview Image
+            </button>
+        </div>
+
+        <div class="preview" id="preview">
+            <h3>Selected Leaf Image</h3>
+            <img id="imagePreview" src="" alt="Selected plant leaf">
+            <p id="fileName"></p>
+        </div>
+    </div>
+
+</section>
+
+<section class="section" id="diseases">
+    <h2>Common Plant Diseases</h2>
+    <p class="subtitle">
+        Learn about common plant diseases and their symptoms.
+    </p>
+
+    <div class="disease-grid">
+
+        <div class="disease-card">
+            <div class="disease-icon">🍂</div>
+            <h3>Early Blight</h3>
+            <p>
+                Common in tomato and potato plants.
+                Causes brown spots and yellowing of leaves.
+            </p>
+        </div>
+
+        <div class="disease-card">
+            <div class="disease-icon">🌫️</div>
+            <h3>Powdery Mildew</h3>
+            <p>
+                Appears as white powder-like patches
+                on leaves and stems.
+            </p>
+        </div>
+
+        <div class="disease-card">
+            <div class="disease-icon">🍃</div>
+            <h3>Leaf Rust</h3>
+            <p>
+                Produces orange or reddish-brown spots
+                on affected leaves.
+            </p>
+        </div>
+
+        <div class="disease-card">
+            <div class="disease-icon">🌱</div>
+            <h3>Leaf Mosaic</h3>
+            <p>
+                Causes uneven green and yellow patterns
+                and may affect plant growth.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="result-section" id="tips">
+    <h2>Detection Information</h2>
+
+    <div class="result-card">
+        <h3>How the system works</h3>
+        <p>
+            <strong>Step 1:</strong> Upload a clear plant leaf image.
+        </p>
+        <p>
+            <strong>Step 2:</strong> A trained machine-learning model
+            analyzes the image.
+        </p>
+        <p>
+            <strong>Step 3:</strong> The system displays the predicted
+            disease and possible treatment guidance.
+        </p>
+
+        <div class="note">
+            <strong>Plant care tip:</strong>
+            Check leaves regularly, avoid excessive watering,
+            and remove infected plant material when appropriate.
+        </div>
+    </div>
+</section>
+
+<footer>
+    PlantCare | Plant Disease Detection Project
+    <br><br>
+    Built with HTML and CSS
+</footer>
+
+<script>
+function previewImage() {
+    const input = document.getElementById("leafImage");
+    const preview = document.getElementById("preview");
+    const image = document.getElementById("imagePreview");
+    const fileName = document.getElementById("fileName");
+
+    if (!input.files || !input.files[0]) {
+        alert("Please select a plant leaf image first.");
+        return;
+    }
+
+    const file = input.files[0];
+
+    if (!file.type.startsWith("image/")) {
+        alert("Please select a valid image file.");
+        return;
+    }
+
+    image.src = URL.createObjectURL(file);
+    fileName.textContent = "Selected file: " + file.name;
+    preview.style.display = "block";
+}
+</script>
+
+</body>
+</html>
